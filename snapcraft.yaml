@@ -1,0 +1,38 @@
+name: daemon-example
+summary: deamon example snap
+description: |
+    This is an example snap used for the snap deamons workshop
+version: '1.0'
+base: core20
+grade: stable
+confinement: strict
+
+apps:
+  exampled:
+    command: bin/exampled
+    plugs: [network, network-bind, daemon-notify]
+
+  send-auxd:
+    command: bin/send-auxd
+    plugs: [network]
+
+  send-d:
+    command: bin/send-d
+    plugs: [network]
+
+  show:
+    command: bin/show
+
+parts:
+  examples:
+    plugin: make
+    source: .
+    stage-packages: 
+      - netcat
+
+  copy:
+    plugin: dump
+    source: .
+    after: [ examples ]
+    organize:
+        'tools/*': bin/
