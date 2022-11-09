@@ -10,7 +10,7 @@ confinement: strict
 apps:
   exampled:
     command: bin/exampled
-    plugs: [network, network-bind, daemon-notify]
+    plugs: [network, network-bind]
 
   send-auxd:
     command: bin/send-auxd
